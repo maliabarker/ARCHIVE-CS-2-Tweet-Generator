@@ -1,9 +1,14 @@
 import re
+from string import punctuation
 # –––––––––––––––––––––––––––––––––DICT––––––––––––––––––––––––––––––––––––––––––––
 def create_histogram_dict(file):
     with open(file) as f:
         text = f.read()
-        str_list = re.sub('[^A-Za-z0-9\s]+', '', text).lower().split()
+        punct = punctuation + '”“‘’'
+        mod_str = ' '.join(filter(None, (word.strip(punct) for word in text.split())))
+        str_list = mod_str.lower().split()
+        print(str_list)
+        # re.sub('[^A-Za-z0-9\s]+', '', text).lower().split()
         histogram = {}
         for word in str_list:
             if word in histogram:
@@ -60,8 +65,9 @@ def find_word_frequency_tuple(word, histogram):
 if __name__ == "__main__":
     example_histogram = create_histogram_dict('example.txt')
     print(example_histogram)
-    print(find_unique_words_dict(example_histogram))
-    print(find_word_frequency_dict('sherlock', example_histogram))
+    
+    # print(find_unique_words_dict(example_histogram))
+    # print(find_word_frequency_dict('sherlock', example_histogram))
 
     # example_2_histogram = create_histogram_tuple('example.txt')
     # print(example_2_histogram)
