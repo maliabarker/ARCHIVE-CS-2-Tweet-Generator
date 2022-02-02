@@ -11,13 +11,13 @@ app = Flask(__name__)
 def before_first_request():
     """Runs only once at Flask startup"""
     # TODO: Initialize your histogram, hash table, or markov chain here.
-    histogram = create_histogram_dict('example_txt/example1.txt')
-    return histogram
+    return create_histogram_dict('example_txt/example1.txt')
 
 
 @app.route("/")
 def home():
     histogram = before_first_request()
+    print(histogram)
     word = weighted_word(histogram)
     """Route that returns a web page containing the generated text."""
     return word
